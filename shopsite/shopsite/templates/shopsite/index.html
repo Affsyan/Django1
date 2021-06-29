@@ -24,24 +24,17 @@
 			<div class="clearfix">
 			</div>
 			<div class="tab-content">
-				<div class="block">
-					<a href="#"><img src="{% static 'shopsite/img/product-1.jpg' %}" alt="">
-						<div class="text">
-							<img src="{% static 'shopsite/img/icon-hover.png' %}" alt="img">
-							<h4>Отличный стул</h4>
-							<p>Расположитесь комфортно. </p>
-						</div> 
-					</a>
-				</div>
-				<div class="block">
-					<a href="#"><img src="{% static 'shopsite/img/product-2.jpg' %}" alt="">
-						<div class="text">
-							<img src="{% static 'shopsite/img/icon-hover.png' %}" alt="">
-							<h4>Стул повышенного качества</h4>
-							<p>Не оторваться. </p>
-						</div>
-					</a>
-				</div>	
+				{% for product in products %}
+					<div class="block">
+						<a href="#"><img src="/media/{{product.image}}" alt="img" width="270" height="270">
+							<div class="text">
+								<img src="{% static 'shopsite/img/icon-hover.png' %}" alt="img">
+								<h4>{{product.name}}</h4>
+								<p>{{product.short_desc}} </p>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 		
