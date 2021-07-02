@@ -1044,3 +1044,12 @@ td:first-child {
 .related-products a:hover .text{
 	display: block;
 }
+.products_img_370 {
+	height: 370px;
+	width: 370px;
+}
+
+.index_img_270 {
+	height: 270px;
+	width: 270px;
+}
