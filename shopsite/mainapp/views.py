@@ -23,15 +23,15 @@ def products(request, pk=None):
         basket = Basket.objects.filter(user=request.user)
 
     links_menu = ProductCategory.objects.all()
-    products = Product.objects.all().order_by('price')
+    products = Product.objects.all().order_by('name')[:6]
 
     if pk is not None:
         if pk == 0:
-            products = Product.objects.all().order_by('price')
+            products = Product.objects.all().order_by('name')[:6]
             category = {'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk).order_by('price')
+            products = Product.objects.filter(category__pk=pk).order_by('name')
 
         context = {
             'title': title,
@@ -41,7 +41,7 @@ def products(request, pk=None):
         }
         return render(request=request, template_name='mainapp/products.html', context=context)
 
-    same_products = Product.objects.all()[3:5]
+    same_products = Product.objects.all()
 
     context = {
         'title': title,
