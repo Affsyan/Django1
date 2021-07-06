@@ -1,0 +1,45 @@
+{% extends 'shopsite/base.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="container">
+		<div class="hero-white">
+			{% include 'shopsite/includes/inc_main_menu.html' %}
+		</div>
+
+		<div class="details">
+			<div class="related">
+					{% if user.is_authenticated %}
+						<div class="container">
+							<div class="row">
+							<table class="table">
+							  <thead>
+								<tr>
+								  <th scope="col">#</th>
+								  <th scope="col">Продукт</th>
+								  <th scope="col">Количестов</th>
+								</tr>
+							  </thead>
+							  <tbody>
+							  {% for item in basket %}
+								  <tr>
+									  <th scope="row">{{ forloop.counter }}</th>
+									  <td>{{ item.product }}</td>
+									  <td>{{ item.quantity }}</td>
+								  </tr>
+							  {% endfor %}
+
+
+							  </tbody>
+							</table>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="clr"></div>
+
+	</div>	
+{% endblock %}

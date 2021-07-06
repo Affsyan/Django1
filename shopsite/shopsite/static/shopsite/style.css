@@ -1053,3 +1053,12 @@ td:first-child {
 	height: 270px;
 	width: 270px;
 }
+
+.edit_img_400 {
+	height: 300px;
+	width: 300px;
+	border-radius: 10px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
