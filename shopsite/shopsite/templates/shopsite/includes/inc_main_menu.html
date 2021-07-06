@@ -23,7 +23,7 @@
     </ul>
     <a href="#" class="search"></a>
     <a href="{% url 'basket:view' %}" class="basket">
-        <span style="background: #D9FFAD;">
+        <span style="background: white; border-radius: 50%; color: red;">
             {% if basket %} {{ basket|length }} {% endif %}
         </span>
     </a>
