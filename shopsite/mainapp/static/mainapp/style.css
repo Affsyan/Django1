@@ -23,3 +23,13 @@
 	box-shadow: none;
 	background-color: #d41306;
 }
+
+.w-70 {
+	height: 70px;
+	width: 70px;
+}
+
+.w-570 {
+	height: 570px;
+	width: 570px;
+}

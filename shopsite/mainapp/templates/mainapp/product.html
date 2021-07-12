@@ -12,21 +12,21 @@
 			<div class="details-products">
 				<div class="details-slider">
 					<div class="slider-product text-center">
-						<img src="/media/{{hot_product.image}}" class="w-570">
+						<img src="/media/{{product.image}}" class="w-570">
 					</div>
 					<div class="slider-control d-flex ">
 						<div class="block">
-							<a href="#"><img src="/media/{{hot_product.image}}" alt="" class="w-70">
+							<a href="#"><img src="/media/{{product.image}}" alt="" class="w-70">
 								<div class="text"></div>
 							</a>
 						</div>
 						<div class="block">
-							<a href="#"><img src="/media/{{hot_product.image}}" alt="" class="w-70">
+							<a href="#"><img src="/media/{{product.image}}" alt="" class="w-70">
 								<div class="text"></div>
 							</a>
 						</div>
 						<div class="block">
-							<a href="#"><img src="/media/{{hot_product.image}}" alt="" class="w-70">
+							<a href="#"><img src="/media/{{product.image}}" alt="" class="w-70">
 								<div class="text"></div>
 							</a>
 						</div>
@@ -34,14 +34,14 @@
 				</div>
 
 				<div class="description">
-					<h3 class="big-bold">{{ hot_product.name }}</h3>
+					<h3 class="big-bold">{{ product.name }}</h3>
 					<h3 class="red">горячее предложение</h3>
-					<p class="price"> {{ hot_product.price }} <span>руб</span></p>
-					<a href="#" class="red-button">
+					<p class="price"> {{ product.price }} <span>руб</span></p>
+					<a href="{% url 'basket:add' product.pk %}" class="red-button">
 						заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
 					</a>
 					<div class="description-text">
-						{{ hot_product.description }}
+						{{ product.description }}
 					</div>
 				</div>
 			</div>
