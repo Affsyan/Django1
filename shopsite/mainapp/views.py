@@ -29,27 +29,33 @@ def products(request, pk=None):
     title = 'продукты/каталог'
     basket = get_basket(request.user)
 
+    hot_product = get_hot_product()
+    same_products = get_same_products(hot_product)
+
     links_menu = ProductCategory.objects.all()
-    products = Product.objects.all().order_by('price')
+    products = Product.objects.all().order_by('price').exclude(pk=hot_product.pk)[:6]
 
     if pk is not None:
         if pk == 0:
-            products = Product.objects.all().order_by('price')
+            products = Product.objects.all().order_by('price').exclude(pk=hot_product.pk)
             category = {'name': 'все'}
+            basket = get_basket(request.user)
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
             products = Product.objects.filter(category__pk=pk).order_by('price')
+            basket = get_basket(request.user)
 
         context = {
             'title': title,
             'links_menu': links_menu,
+            'hot_product': hot_product,
+            'same_products': same_products,
             'products': products,
             'category': category,
+            'basket': basket,
         }
         return render(request=request, template_name='mainapp/products.html', context=context)
 
-    hot_product = get_hot_product()
-    same_products = get_same_products(hot_product)
 
     context = {
         'title': title,

@@ -46,28 +46,28 @@
 				</div>
 			</div>
 
-			<div class="related">
-				<div class="title clearfix">
-					<h2>Похожие продукты</h2>
-					<a class="explore" href="#">показать все <img src="{% static 'shopsite/img/arrow.png' %}" alt=""></a>
-				</div>
-				<div class="related-products clearfix" >
-					{% for product in products %}
-						<div class="block">
-							<a href="{% url 'products:product' product.pk %}"><img src="/media/{{product.image}}" alt="img" class="products_img_370">
-								<div class="text">
-									<img src="{% static 'shopsite/img/icon-hover.png' %}" alt="img">
-									<h4>{{product.name}}</h4>
-									<p>{{product.short_desc}} </p>
-								</div>
-							</a>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
+<!--			<div class="related">-->
+<!--				<div class="title clearfix">-->
+<!--					<h2>Похожие продукты</h2>-->
+<!--					<a class="explore" href="#">показать все <img src="{% static 'shopsite/img/arrow.png' %}" alt=""></a>-->
+<!--				</div>-->
+<!--				<div class="related-products clearfix" >-->
+<!--					{% for product in products %}-->
+<!--						<div class="block">-->
+<!--							<a href="{% url 'products:product' product.pk %}"><img src="/media/{{product.image}}" alt="img" class="products_img_370">-->
+<!--								<div class="text">-->
+<!--									<img src="{% static 'shopsite/img/icon-hover.png' %}" alt="img">-->
+<!--									<h4>{{product.name}}</h4>-->
+<!--									<p>{{product.short_desc}} </p>-->
+<!--								</div>-->
+<!--							</a>-->
+<!--						</div>-->
+<!--					{% endfor %}-->
+<!--				</div>-->
+<!--			</div>-->
 		</div>
 
-		<div class="clr"></div>
+		<div class="clr"></div><br>
 
 	</div>
 {% endblock %}

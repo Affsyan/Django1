@@ -24,7 +24,7 @@
     <a href="#" class="search"></a>
     <a href="{% url 'basket:view' %}" class="basket">
         <span style="background: #90ee90; border-radius: 100%; color: red;">
-            {% if basket %} {{ basket|length }} {% endif %}
+            {% if basket %} {{ basket.count }} {% endif %}
         </span>
     </a>
 </div>

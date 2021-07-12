@@ -125,6 +125,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "shopsite", "static"),
+    os.path.join(BASE_DIR, "basketapp", "static"),
 )
 
 MEDIA_URL = '/media/'
