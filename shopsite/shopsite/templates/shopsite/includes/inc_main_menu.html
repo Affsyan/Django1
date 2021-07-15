@@ -6,6 +6,14 @@
                class="{% if request.path == '/products/'%}active{% endif %}">продукты</a></li>
         <li><a href="{% url 'contacts' %}"
                class="{% if request.path == '/contacts/'%}active{% endif %}">контакты</a></li>
+        {% if user.is_superuser %}
+            <li>
+                <a href="{% url 'admin_staff:users' %}">
+                    Панель администратора
+
+                </a>
+            </li>
+        {% endif %}
         {% if user.is_authenticated %}
             <li>
                 <a href="{% url 'auth:edit' %}">

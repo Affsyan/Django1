@@ -11,4 +11,8 @@ class ShopUser(AbstractUser):
         verbose_name='возраст'
     )
 
+    is_deleted = models.BooleanField(
+        default=False
+    )
+
 
