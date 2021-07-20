@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 
 from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def get_basket(user):
@@ -25,7 +26,7 @@ def get_same_products(hot_product):
     return same_products
 
 
-def products(request, pk=None):
+def products(request, pk=None, page=1):
     title = 'продукты/каталог'
     basket = get_basket(request.user)
 
@@ -33,26 +34,32 @@ def products(request, pk=None):
     same_products = get_same_products(hot_product)
 
     links_menu = ProductCategory.objects.all()
-    products = Product.objects.all().order_by('price').exclude(pk=hot_product.pk)[:6]
+    products = Product.objects.all().order_by('price')
 
     if pk is not None:
         if pk == 0:
-            products = Product.objects.all().order_by('price').exclude(pk=hot_product.pk)
-            category = {'name': 'все'}
-            basket = get_basket(request.user)
+            products = Product.objects.filter(is_deleted=False).order_by('price')
+            category = {'pk': 0, 'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk).order_by('price')
-            basket = get_basket(request.user)
+            products = Product.objects.filter(is_deleted=False, category__pk=pk).order_by('price')
+
+        paginator = Paginator(products, 3)
+
+        try:
+            products_paginator = paginator.page(page)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)
 
         context = {
             'title': title,
             'links_menu': links_menu,
             'hot_product': hot_product,
             'same_products': same_products,
-            'products': products,
+            'products': products_paginator,
             'category': category,
-            'basket': basket,
         }
         return render(request=request, template_name='mainapp/products.html', context=context)
 
