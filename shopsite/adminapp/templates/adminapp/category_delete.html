@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="row">
-    <p> Осторожно! Вы точно хотите удалть продукт - {{ categories_to_delete.name }} ?</p>
+    <p> Осторожно! Вы точно хотите удалть категорию - {{ categories_to_delete.name }} ?</p>
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
