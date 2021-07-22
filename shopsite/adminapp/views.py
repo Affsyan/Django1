@@ -1,11 +1,14 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from adminapp.forms import ShopUserAdminEditForm
+from adminapp.forms import ShopUserAdminEditForm, ProductEditForm
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from django.shortcuts import get_object_or_404, render
 from mainapp.models import Product, ProductCategory
+
+from django.views.generic.list import ListView
+from django.views.generic import CreateView
 from django.contrib.auth.decorators import user_passes_test
 
 
@@ -65,20 +68,6 @@ def user_update(request, pk):
     return render(request, 'adminapp/user_update.html', context)
 
 
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-
-from adminapp.forms import ShopUserAdminEditForm, ProductEditForm
-from authapp.forms import ShopUserRegisterForm
-from authapp.models import ShopUser
-from django.shortcuts import get_object_or_404, render
-from mainapp.models import Product, ProductCategory
-from django.contrib.auth.decorators import user_passes_test
-
-from django.views.generic.list import ListView
-from django.views.generic import CreateView
-
-
 class UsersListView(ListView):
     model = ShopUser
     template_name = 'adminapp/users.html'
@@ -94,19 +83,6 @@ class UsersListView(ListView):
     def get_queryset(self):
         return ShopUser.objects.all().order_by('-is_active', '-is_superuser', '-is_staff', 'username')
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def users(request):
-#     title = 'админка/пользователи'
-#
-#     users_list = ShopUser.objects.all().order_by('-is_active', '-is_superuser', '-is_staff', 'username')
-#
-#     context = {
-#         'title': title,
-#         'objects': users_list
-#     }
-#
-#     return render(request, 'adminapp/users.html', context)
-
 
 class UserCreateView(CreateView):
     model = ShopUser
@@ -119,25 +95,6 @@ class UserCreateView(CreateView):
         context['title'] = 'пользователи/создать'
 
         return context
-
-# def user_create(request):
-#     title = 'пользователи/создать'
-#
-#     if request.method == 'POST':
-#         user_form = ShopUserRegisterForm(request.POST, request.FILES)
-#
-#         if user_form.is_valid():
-#             user_form.save()
-#             return HttpResponseRedirect(reverse('admin_staff:users'))
-#     else:
-#         user_form = ShopUserRegisterForm()
-#
-#     context = {
-#         'title': title,
-#         'user_form': user_form
-#     }
-#
-#     return render(request, 'adminapp/user_create.html', context)
 
 
 def user_update(request, pk):
@@ -192,7 +149,7 @@ def categories(request):
     return render(request, 'adminapp/categories.html', context)
 
 
-def category_create(request):
+def category_create(request, pk):
     pass
 
 
@@ -201,7 +158,21 @@ def category_update(request, pk):
 
 
 def category_delete(request, pk):
-    pass
+    title = 'Категория/удаление'
+
+    categories = get_object_or_404(ProductCategory, pk=pk)
+
+    if request.method == 'POST':
+        categories.is_deleted = True
+        categories.save()
+        return HttpResponseRedirect(reverse('admin_staff:categories'))
+
+    context = {
+        'title': title,
+        'categories_to_delete': categories
+    }
+
+    return render(request, 'adminapp/category_delete.html', context)
 
 
 def products(request, pk):
