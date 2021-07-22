@@ -140,8 +140,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/auth/login/'
 
+DOMAIN_NAME = 'http://127.0.0.1:8000'
+#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+#EMAIL_FILE_PATH = 'tmp/messages'
+
 EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '9c224596512530'
 EMAIL_HOST_PASSWORD = 'b9035667255d6f'
-EMAIL_PORT = '465'
+EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
