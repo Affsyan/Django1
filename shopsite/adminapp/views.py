@@ -149,8 +149,24 @@ def categories(request):
     return render(request, 'adminapp/categories.html', context)
 
 
-def category_create(request, pk):
-    pass
+def category_create(request):
+    title = 'категория/создать'
+
+    if request.method == 'POST':
+        categories_form = ProductCategory(request.POST)
+
+        if categories_form.is_valid():
+            categories_form.save()
+            return HttpResponseRedirect(reverse('admin_staff:category_create'))
+    else:
+        categories_form = ProductCategory()
+
+    context = {
+        'title': title,
+        'categories_form': categories_form,
+    }
+
+    return render(request, 'adminapp/category_create.html', context)
 
 
 def category_update(request, pk):
@@ -224,7 +240,7 @@ def product_read(request, pk):
 
 
 def product_update(request, pk):
-    title = 'продукты/рудактирование'
+    title = 'продукты/редактирование'
 
     edit_product = get_object_or_404(Product, pk=pk)
 
