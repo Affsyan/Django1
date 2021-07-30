@@ -172,8 +172,8 @@ DOMAIN_NAME = 'http://127.0.0.1:8000'
 #EMAIL_FILE_PATH = 'tmp/messages'
 
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '9c224596512530'
-EMAIL_HOST_PASSWORD = 'b9035667255d6f'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 
@@ -181,6 +181,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.vk.VKOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.github.GithubOAuth2',
 )
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = env('SOCIAL_AUTH_VK_OAUTH2_KEY')
@@ -188,3 +189,6 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = env('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 
 SOCIAL_AUTH_FACEBOOK_KEY = env('FACEBOOK_APP_ID')
 SOCIAL_AUTH_FACEBOOK_SECRET = env('FACEBOOK_API_SECRET')
+
+SOCIAL_AUTH_GITHUB_KEY = env('GITHUB_APP_ID')
+SOCIAL_AUTH_GITHUB_SECRET = env('GITHUB_API_SECRET')
