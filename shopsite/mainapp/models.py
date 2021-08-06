@@ -1,12 +1,13 @@
 from django.db import models
 
+
 class ProductCategory(models.Model):
-    name = models.CharField(verbose_name='имя', max_length=64, unique=True, )
+    name = models.CharField(verbose_name='имя', max_length=64, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
-    is_deleted = models.BooleanField(default=False)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name or f"Category with id - {self.pk}"
@@ -58,12 +59,14 @@ class Product(models.Model):
         auto_now=True,
     )
 
-    is_deleted = models.BooleanField(
-        default=False
-    )
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name or f"Product with id - {self.pk}"
+
+    @staticmethod
+    def get_items():
+        return Product.objects.filter(is_deleted=False).order_by('category', 'name')
 
     class Meta:
         verbose_name = 'продукт'
