@@ -4,7 +4,7 @@ from mainapp.models import Product
 
 def index(request):
     title = 'главная'
-    products = Product.objects.all()[:3]
+    products = Product.objects.filter(is_deleted=False, category__is_deleted=False).select_related('category')[:3]
 
     context = {
         'title': title,

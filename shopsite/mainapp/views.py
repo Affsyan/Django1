@@ -21,8 +21,7 @@ def get_hot_product():
 
 
 def get_same_products(hot_product):
-    same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)
-
+    same_products = Product.objects.filter(category=hot_product.category, is_deleted=False, category__is_deleted=False).exclude(pk=hot_product.pk).select_related('category')
     return same_products
 
 
@@ -33,15 +32,15 @@ def products(request, pk=None, page=1):
     same_products = get_same_products(hot_product)
 
     links_menu = ProductCategory.objects.all()
-    products = Product.objects.all().order_by('price')
+    products = Product.objects.all().order_by('price').select_related('category')
 
     if pk is not None:
         if pk == 0:
-            products = Product.objects.filter(is_deleted=False).order_by('price')
+            products = Product.objects.filter(is_deleted=False).order_by('price').select_related('category')
             category = {'pk': 0, 'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(is_deleted=False, category__pk=pk).order_by('price')
+            products = Product.objects.filter(is_deleted=False, category__pk=pk).order_by('price').select_related('category')
 
         paginator = Paginator(products, 3)
 
