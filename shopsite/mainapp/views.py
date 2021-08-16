@@ -93,7 +93,7 @@ def product(request, pk):
 
     context = {
         'title': title,
-        'links_menu': ProductCategory.objects.all(),
+        'links_menu': get_hot_product(),
         'product': get_object_or_404(Product, pk=pk),
         'basket': get_basket(request.user),
     }
