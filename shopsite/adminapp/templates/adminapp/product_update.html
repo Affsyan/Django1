@@ -3,12 +3,12 @@
 
 
 {% block content %}
-    <div class="row">
+    <div class="col-3 mx-auto">
         <div class="text-center">
             <img src="/media/{{ product.image }}" class="w-25">
         </div>
     </div>
-    <div class="row">
+    <div class="col-3 mx-auto">
         <form class="form-horizontal" action="{% url 'admin_staff:product_update' product.pk %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ update_form.as_p }}
